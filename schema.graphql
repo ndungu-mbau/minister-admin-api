@@ -1,0 +1,247 @@
+type Query{
+  hello: String
+  client: clientQueries
+  admin: adminQueries
+}
+
+type Mutation{
+  hello: String
+  client: clientMutations
+  admin: adminMutations
+}
+
+# client things
+type clientQueries{
+  hello: String
+
+  devotions(archived: Boolean!): [devotion]
+  devotion(id: String!): devotion
+
+  sermons(archived: Boolean): [sermon]
+  sermon(id: String!): sermon
+
+  events(archived: Boolean): [event]
+  event(id: String!): event
+
+  notices(archived: Boolean): [notice]
+  notice(id: String!): notice
+
+  notes(archived: Boolean): [userNote]
+  note(id: String!): userNote
+}
+
+type clientMutations{
+  notes: userNotesMutations
+}
+
+# admin things
+type adminQueries{
+  hello: String
+  
+  church: church
+
+  devotions(archived: Boolean): [devotion]
+  devotion(id: String!): devotion
+
+  sermons(archived: Boolean): [sermon]
+  sermon(id: String!): sermon
+
+  events(archived: Boolean): [event]
+  event(id: String!): event
+
+  notices(archived: Boolean): [notice]
+  notice(id: String!): notice
+  
+  notes(archived: Boolean): [userNote]
+  note(id: String!): userNote
+}
+
+type adminMutations{
+  hello: String
+  
+  devotions: devotionMutations
+  sermons: sermonMutations
+  events: eventMutations
+  notices: noticeMutations
+  notes: userNotesMutations
+}
+
+# devotion things
+type devotion{
+  id: String,
+  title: String,
+  verse: String,
+  description: String,
+  date: String,
+  interpretation: String,
+  church: church
+}
+
+input Idevotion{
+  title: String!
+  verse: String!
+  description: String!
+  date: String!
+  interpretation: String!
+}
+
+input Udevotion{
+  id: String!
+  title: String
+  verse: String
+  description: String
+  date: String
+  interpretation: String
+}
+
+type devotionMutations{
+  create(devotion: Idevotion!): devotion
+  update(devotion: Udevotion!): devotion
+  archive(devotion: Udevotion!): devotion
+  restore(devotion: Udevotion!): devotion
+}
+
+# sermon things
+type sermon{
+  id: String,
+  title: String,
+  verse: String,
+  description: String,
+  date: String,
+  church: church,
+  interpretation: String,
+  pastor: String,
+  video_url: String
+}
+
+input Isermon{
+  title: String!
+  verse: String!
+  description: String!
+  date: String!
+  church: String!
+  interpretation: String!
+  pastor: String!
+  video_url: String!
+}
+
+input Usermon{
+  id: String!
+  title: String
+  verse: String
+  description: String
+  date: String
+  church: String
+  interpretation: String
+  pastor: String
+  video_url: String
+}
+
+type sermonMutations{
+  create(sermon: Isermon!): sermon
+  update(sermon: Usermon!): sermon
+  archive(sermon: Usermon!): sermon
+  restore(sermon: Usermon!): sermon
+}
+
+# notice things
+type notice{
+  id: String,
+  title: String,
+  date: String,
+  content: String,
+  department: String,
+  church: church
+}
+
+input Inotice{
+  id: String!
+  title: String!
+  date: String!
+  content: String!
+  department: String!
+  church: String!
+}
+
+input Unotice{
+  id: String!
+  title: String
+  date: String
+  content: String
+  department: String
+  church: String
+}
+
+type noticeMutations{
+  create(notice: Inotice!): notice
+  update(notice: Unotice!): notice
+  archive(notice: Unotice!): notice
+  restore(notice: Unotice!): notice
+}
+
+# event things
+type event{
+  id: String,
+  title: String,
+  date: String,
+  content: String,
+  department: String,
+  church: church
+}
+
+input Ievent{
+  title: String!
+  date: String!
+  content: String!
+  department: String!
+  church: String!
+}
+
+input Uevent{
+  id: String!
+  title: String
+  date: String
+  content: String
+  department: String
+  church: String
+}
+
+type eventMutations{
+  create(event: Ievent!): event
+  update(event: Uevent!): event
+  archive(event: Uevent!): event
+  restore(event: Uevent!): event
+}
+
+# user notes things
+type userNote{
+  id: String,
+  title: String,
+  content: String,
+  type: String
+}
+
+input IuserNote{
+  title: String!
+  content: String!
+  type: String!
+}
+
+input UuserNote{
+  id: String!
+  title: String
+  content: String
+  type: String
+}
+
+type userNotesMutations{
+  create(userNote: IuserNote!): userNote
+  update(userNote: UuserNote!): userNote
+  archive(userNote: UuserNote!): userNote
+  restore(userNote: UuserNote!): userNote
+}
+
+type church{
+  id: String
+  name: String
+}
