@@ -264,9 +264,9 @@ type userNotesMutations{
 type church{
   id: String
   name: String
-  devotions: [devotion]
-  sermons: [sermon]
-  notices: [notice]
-  events: [event]
-  members: [member]
+  devotions(archived: Boolean): [devotion]
+  sermons(archived: Boolean): [sermon]
+  notices(archived: Boolean): [notice]
+  events(archived: Boolean): [event]
+  members(archived: Boolean): [member]
 }
