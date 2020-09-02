@@ -54,6 +54,9 @@ type adminQueries{
   
   notes(archived: Boolean): [userNote]
   note(id: String!): userNote
+
+  members(archived: Boolean): [member]
+  member(id: String!): member
 }
 
 type adminMutations{
@@ -64,6 +67,23 @@ type adminMutations{
   events: eventMutations
   notices: noticeMutations
   notes: userNotesMutations
+  members: memberMutations
+}
+
+# member things
+type member{
+  church: church
+  name: String
+  contact: String
+}
+
+input Imember{
+  id: String
+}
+
+type memberMutations{
+  archive(member: Imember!): member
+  restore(member: Imember!): member
 }
 
 # devotion things
@@ -244,4 +264,9 @@ type userNotesMutations{
 type church{
   id: String
   name: String
+  devotions: [devotion]
+  sermons: [sermon]
+  notices: [notice]
+  events: [event]
+  members: [member]
 }

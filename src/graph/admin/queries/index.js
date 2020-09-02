@@ -27,6 +27,11 @@ import {
   single as note,
 } from './notes'
 
+import {
+  list as members,
+  single as member,
+} from './members'
+
 const resolvers = {
   devotions,
   devotion,
@@ -43,7 +48,10 @@ const resolvers = {
   notes,
   note,
 
-  church
+  church,
+
+  members,
+  member,
 }
 
 export {
