@@ -1,10 +1,12 @@
 const nested = {
+  church: {
+
+  },
   devotion: {
     id: async (root, args, { hemera }) => {
       return root._id
     },
     church: async (root, args, { hemera }) => {
-      console.log({ root, args, hemera })
       const { data } = await hemera.act({
         topic: 'db-service',
         cmd: 'find-one',
