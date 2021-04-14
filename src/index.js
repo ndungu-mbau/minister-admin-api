@@ -26,7 +26,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 hemera.ready(() => {
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(bodyParser.json('*/*'))
+  app.use(bodyParser.json('application/json'))
   app.use(cookieParser())
 
   app.post('/api/client/register', async (req, res) => {
