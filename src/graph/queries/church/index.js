@@ -1,5 +1,20 @@
+const collection = "church"
+
+const single = async (root, args, { church, hemera }) => {
+  const { data } = await hemera.act({
+    topic:'db-service',
+    cmd:'find-one',
+    collection,
+    params:{
+      id: church
+    }
+  })
+
+  return data
+}
+
 const nested = {
-  church: {
+  [collection]: {
     devotions: async (root, { archived = false }, { hemera }) => {
       const { data } = await hemera.act({
         topic: 'db-service',
@@ -66,74 +81,6 @@ const nested = {
       return data
     },
   },
-  devotion: {
-    id: async (root, args, { hemera }) => {
-      return root._id
-    },
-    church: async (root, args, { hemera }) => {
-      const { data } = await hemera.act({
-        topic: 'db-service',
-        cmd: 'find-one',
-        collection: 'church',
-        params: {
-          id: root.church
-        }
-      })
-
-      return data
-    }
-  },
-  event: {
-    id: async (root, args, { hemera }) => {
-      return root._id
-    },
-    church: async (root, args,  { hemera }) => {
-      const { data } = await hemera.act({
-        topic:'db-service',
-        cmd:'find-one',
-        collection: 'church',
-        params: {
-          id: root.church
-        }
-      })
-
-      return data
-    }
-  },
-  notice: {
-    id: async (root, args, { hemera }) => {
-      return root._id
-    },
-    church: async (root, args,  { hemera }) => {
-      const { data } = await hemera.act({
-        topic:'db-service',
-        cmd:'find-one',
-        collection,
-        params: {
-          id: root.church
-        }
-      })
-
-      return data
-    }
-  },
-  sermon: {
-    id: async (root, args, { hemera }) => {
-      return root._id
-    },
-    church: async (root, args,  { hemera }) => {
-      const { data } = await hemera.act({
-        topic:'db-service',
-        cmd:'find-one',
-        collection: 'church',
-        params: {
-          id: root.church
-        }
-      })
-
-      return data
-    }
-  }
 }
 
-export { nested }
+export { single, nested }

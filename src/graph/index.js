@@ -2,31 +2,10 @@ require("babel-polyfill")
 import "graphql-import-node"
 import { importSchema } from 'graphql-import'
 
-import {
-  resolvers as clientResolvers,
-  mutations as clientMutations
-} from './client'
-
-import {
-  resolvers as adminResolvers,
-  mutations as adminMutations
-} from './admin'
-
-import { nested } from "./nested"
+import { Query, nested } from './queries'
+import Mutation from './mutations'
 
 const typeDefs = importSchema("./schema.graphql")
-
-const Query = {
-  hello:() => "World",
-  ...clientResolvers,
-  ...adminResolvers
-}
-
-const Mutation = {
-  hello: () => "Mutation world",
-  ...clientMutations,
-  ...adminMutations
-}
 
 const root = {
   Query,

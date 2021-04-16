@@ -29,22 +29,6 @@ hemera.ready(() => {
   app.use(bodyParser.json('application/json'))
   app.use(cookieParser())
 
-  app.post('/api/client/register', async (req, res) => {
-    const { church, name, contact, password } = req.body
-
-    const { data: { token }} = await hemera.act({
-      topic: 'auth-service',
-      cmd: 'create-user',
-      name,
-      contact,
-      church,
-      password
-    })
-
-    res.cookie('token', token)
-    res.json({ token })
-  })
-
   app.post('/api/admin/register', async (req, res) => {
     const { churchName, name, contact, password } = req.body
 
@@ -60,24 +44,6 @@ hemera.ready(() => {
 
     res.cookie('token', token)
     res.json({ token })
-  })
-
-  app.post('/api/client/login', async (req, res) => {
-    const { contact, password } = req.body
-
-    const { data: { token, ok, message }} = await hemera.act({
-      topic: 'auth-service',
-      cmd: 'login-user',
-      contact,
-      password
-    })
-
-    if(ok){
-      res.cookie('token', token)
-      res.json({ ok, token })
-    } else {
-      res.json({ ok, message })
-    }
   })
 
   app.post('/api/admin/login', async (req, res) => {
@@ -135,5 +101,5 @@ hemera.ready(() => {
     }
   )
 
-  app.listen(PORT, () => console.log(`🚀  API Server ready at :${PORT}`))
+  app.listen(PORT, () => console.log(`[MINISTER]: 🚀 Admin API Server ready at :${PORT}`))
 })

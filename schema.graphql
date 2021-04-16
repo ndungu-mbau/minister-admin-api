@@ -1,41 +1,9 @@
+schema{
+  query: Query,
+  mutation: Mutation,
+}
+
 type Query{
-  hello: String
-  client: clientQueries
-  admin: adminQueries
-}
-
-type Mutation{
-  hello: String
-  client: clientMutations
-  admin: adminMutations
-}
-
-# client things
-type clientQueries{
-  hello: String
-
-  devotions(archived: Boolean!): [devotion]
-  devotion(id: String!): devotion
-
-  sermons(archived: Boolean): [sermon]
-  sermon(id: String!): sermon
-
-  events(archived: Boolean): [event]
-  event(id: String!): event
-
-  notices(archived: Boolean): [notice]
-  notice(id: String!): notice
-
-  notes(archived: Boolean): [userNote]
-  note(id: String!): userNote
-}
-
-type clientMutations{
-  notes: userNotesMutations
-}
-
-# admin things
-type adminQueries{
   hello: String
   
   church: church
@@ -59,7 +27,7 @@ type adminQueries{
   member(id: String!): member
 }
 
-type adminMutations{
+type Mutation{
   hello: String
   
   devotions: devotionMutations
@@ -72,6 +40,7 @@ type adminMutations{
 
 # member things
 type member{
+  id: String
   church: church
   name: String
   contact: String
